@@ -54,38 +54,21 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-    let result = 0;
+let buttons = document.querySelector(".buttonsContainer");
 
-    for(let i = 0; i < 5; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        result = playRound(humanSelection, computerSelection);
+buttons.addEventListener('click', (event) => {
+    let target = event.target;
 
-        if(result === 1){
-            computerScore++;
-        }else if(result === 2){
-            humanScore++;
-        }
-
+    switch(target.id) {
+        case 'rock':
+            playRound('rock', getComputerChoice());
+            break;
+        case 'paper':
+            playRound('paper', getComputerChoice());
+            break;
+        case 'scissors':
+            playRound('scissors', getComputerChoice());
+            break;
     }
-
-    if(computerScore > humanScore){
-        return console.log(
-            `You lose! The computer won ${computerScore} rounds and you won ${humanScore}.`
-        );
-    }else if(computerScore < humanScore){
-        return console.log(
-            `Congratulations, you win! The computer won ${computerScore} rounds and you won ${humanScore}.`
-        );
-    }else{
-        return console.log(
-            `It's a tie! The computer won ${computerScore} rounds and you won ${humanScore}.`
-        );
-    }
-}
-
-playGame();
+});
 

@@ -19,56 +19,68 @@ function playRound(humanChoice, computerChoice) {
     humanChoice = humanChoice.toLowerCase();
 
     if(humanChoice === computerChoice){
-        console.log("It's a tie!!");
-        return 0;
+        return "It's a tie!!";
     }
 
     switch (humanChoice) {
         case "rock":
             if(computerChoice === "paper"){
-                console.log("You lose! Paper beats Rock");
-                return 1;
+                computerScore++;
+                return "You lose! Paper beats Rock";
             } else{
-                console.log("You win! Rock beats Scissors");
-                return 2;
+                humanScore++;
+                return "You win! Rock beats Scissors";
             }
         case "paper":
             if(computerChoice === "scissors"){
-                console.log("You lose! Scissors beats Paper");
-                return 1;
+                computerScore++;
+                return "You lose! Scissors beats Paper";
             } else{
-                console.log("You win! Paper beats Rock");
-                return 2;
+                humanScore++;
+                return "You win! Paper beats Rock";
             }
         case "scissors":
             if(computerChoice === "rock"){
-                console.log("You lose! Rock beats Scissors");
-                return 1;
+                computerScore++;
+                return "You lose! Rock beats Scissors";
             } else{
-                console.log("You win! Scissors beats Paper");
-                return 2;
+                humanScore++;
+                return "You win! Scissors beats Paper";
             }
-        default:
-            console.log("Are you sure you have spelled the option correctly?");
-            return 0;
     }
 }
 
 let buttons = document.querySelector(".buttonsContainer");
 
+//The idea is to combine this first event handler approach with the playRound original function
+
 buttons.addEventListener('click', (event) => {
     let target = event.target;
+    let counter = document.querySelector('.result');
+    if(humanScore === 5){
 
-    switch(target.id) {
-        case 'rock':
-            playRound('rock', getComputerChoice());
-            break;
-        case 'paper':
-            playRound('paper', getComputerChoice());
-            break;
-        case 'scissors':
-            playRound('scissors', getComputerChoice());
-            break;
+    }else if(computerScore === 5){
+
+    }else{
+        switch(target.id) {
+            case 'rock':
+                playRound('rock', getComputerChoice());
+                counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            case 'paper':
+                playRound('paper', getComputerChoice());
+                counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            case 'scissors':
+                playRound('scissors', getComputerChoice());
+                counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+        }
     }
+
 });
 
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
+}

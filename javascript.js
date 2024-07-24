@@ -16,10 +16,15 @@ let humanScore = 0;
 let computerScore = 0;
 
 let buttons = document.querySelector(".buttonsContainer");
+let container = document.querySelector('.result');
+let info = document.createElement('p');
+let counter = document.createElement('p')
+
+container.appendChild(info);
+container.appendChild(counter);
 
 buttons.addEventListener('click', (event) => {
     let target = event.target;
-    let counter = document.querySelector('.result');
 
     let computerChoice = getComputerChoice();
 
@@ -28,8 +33,8 @@ buttons.addEventListener('click', (event) => {
     }
 
     if(target.id === computerChoice){
-        counter.textContent = `It's a tie!! 
-        Computer: ${computerScore} Human: ${humanScore}`;
+        info.textContent = `It's a tie!!`
+        counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
         return;
     }
 
@@ -38,60 +43,61 @@ buttons.addEventListener('click', (event) => {
             if(computerChoice === "paper"){
                 computerScore++;
                 if(computerScore === 5) {
-                    counter.textContent = `You lose! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    info.textContent = `You lose!`
                     break;
                 }
-                counter.textContent = `You lose! Paper beats Rock. 
-                Computer: ${computerScore} Human: ${humanScore}`;
+                info.textContent = `You lose! Paper beats Rock.`;
                 break;
             } else{
                 humanScore++;
                 if(humanScore === 5) {
-                    counter.textContent = `Congratulations, you win! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    info.textContent = `Congratulations, you win!`
                     break;
                 }
-                counter.textContent = `You win! Rock beats Scissors. Computer: ${computerScore} Human: ${humanScore}`;
+                info.textContent = `You win! Rock beats Scissors.`;
                 break;
             }
         case 'paper':
             if(computerChoice === "scissors"){
                 computerScore++;
                 if(computerScore === 5) {
-                    counter.textContent = `You lose! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    info.textContent = `You lose!`
                     break;
                 }
-                counter.textContent = `You lose! Scissors beats Paper. 
-                Computer: ${computerScore} Human: ${humanScore}`;
+                info.textContent = `You lose! Scissors beats Paper.`;
                 break;
             } else{
                 humanScore++;
                 if(humanScore === 5) {
-                    counter.textContent = `Congratulations, you win! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    info.textContent = `Congratulations, you win!`
                     break;
                 }
-                counter.textContent = `You win! Paper beats Rock. 
-                Computer: ${computerScore} Human: ${humanScore}`;
+                info.textContent = `You win! Paper beats Rock.`;
                 break;
             }
         case 'scissors':
             if(computerChoice === "rock"){
                 computerScore++;
                 if(computerScore === 5) {
-                    counter.textContent = `You lose! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    info.textContent = `You lose!`
                     break;
                 }
-                counter.textContent = `You lose! Rock beats Scissors. 
-                Computer: ${computerScore} Human: ${humanScore}`;
+                info.textContent = `You lose! Rock beats Scissors.`;
                 break;
             } else{
                 humanScore++;
                 if(humanScore === 5) {
-                    counter.textContent = `Congratulations, you win! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    info.textContent = `Congratulations, you win! `
                     break;
                 }
-                counter.textContent = `You win! Scissors beats Paper. 
-                Computer: ${computerScore} Human: ${humanScore}`;
+                info.textContent = `You win! Scissors beats Paper.`;
                 break;
             }
+    }
+    
+    counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
+
+    if(humanScore === 5 || computerScore === 5) {
+        counter.textContent = `The computer won ${computerScore} rounds and you won ${humanScore}.`    
     }
 });

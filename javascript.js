@@ -11,76 +11,87 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    return prompt(`Write: Rock, paper or scissors.`);
-}
 
-function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase();
-
-    if(humanChoice === computerChoice){
-        return "It's a tie!!";
-    }
-
-    switch (humanChoice) {
-        case "rock":
-            if(computerChoice === "paper"){
-                computerScore++;
-                return "You lose! Paper beats Rock";
-            } else{
-                humanScore++;
-                return "You win! Rock beats Scissors";
-            }
-        case "paper":
-            if(computerChoice === "scissors"){
-                computerScore++;
-                return "You lose! Scissors beats Paper";
-            } else{
-                humanScore++;
-                return "You win! Paper beats Rock";
-            }
-        case "scissors":
-            if(computerChoice === "rock"){
-                computerScore++;
-                return "You lose! Rock beats Scissors";
-            } else{
-                humanScore++;
-                return "You win! Scissors beats Paper";
-            }
-    }
-}
+let humanScore = 0;
+let computerScore = 0;
 
 let buttons = document.querySelector(".buttonsContainer");
-
-//The idea is to combine this first event handler approach with the playRound original function
 
 buttons.addEventListener('click', (event) => {
     let target = event.target;
     let counter = document.querySelector('.result');
-    if(humanScore === 5){
 
-    }else if(computerScore === 5){
+    let computerChoice = getComputerChoice();
 
-    }else{
-        switch(target.id) {
-            case 'rock':
-                playRound('rock', getComputerChoice());
-                counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
-                break;
-            case 'paper':
-                playRound('paper', getComputerChoice());
-                counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
-                break;
-            case 'scissors':
-                playRound('scissors', getComputerChoice());
-                counter.textContent = `Computer: ${computerScore} Human: ${humanScore}`;
-                break;
-        }
+    if(humanScore === 5 || computerScore === 5) {
+        return;
     }
 
-});
+    if(target.id === computerChoice){
+        counter.textContent = `It's a tie!! 
+        Computer: ${computerScore} Human: ${humanScore}`;
+        return;
+    }
 
-function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-}
+    switch(target.id) {
+        case 'rock':
+            if(computerChoice === "paper"){
+                computerScore++;
+                if(computerScore === 5) {
+                    counter.textContent = `You lose! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    break;
+                }
+                counter.textContent = `You lose! Paper beats Rock. 
+                Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            } else{
+                humanScore++;
+                if(humanScore === 5) {
+                    counter.textContent = `Congratulations, you win! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    break;
+                }
+                counter.textContent = `You win! Rock beats Scissors. Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            }
+        case 'paper':
+            if(computerChoice === "scissors"){
+                computerScore++;
+                if(computerScore === 5) {
+                    counter.textContent = `You lose! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    break;
+                }
+                counter.textContent = `You lose! Scissors beats Paper. 
+                Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            } else{
+                humanScore++;
+                if(humanScore === 5) {
+                    counter.textContent = `Congratulations, you win! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    break;
+                }
+                counter.textContent = `You win! Paper beats Rock. 
+                Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            }
+        case 'scissors':
+            if(computerChoice === "rock"){
+                computerScore++;
+                if(computerScore === 5) {
+                    counter.textContent = `You lose! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    break;
+                }
+                counter.textContent = `You lose! Rock beats Scissors. 
+                Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            } else{
+                humanScore++;
+                if(humanScore === 5) {
+                    counter.textContent = `Congratulations, you win! The computer won ${computerScore} rounds and you won ${humanScore}.`
+                    break;
+                }
+                counter.textContent = `You win! Scissors beats Paper. 
+                Computer: ${computerScore} Human: ${humanScore}`;
+                break;
+            }
+    }
+});
